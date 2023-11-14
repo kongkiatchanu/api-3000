@@ -727,17 +727,18 @@ app.get('/sensors/7', (req, res) => {
       var us_aqi = 0;
       us_aqi = uscal(obj.pm25);
 
-      if(obj.pm25<=25){
+      if(obj.pm25<=15){
         th_score = 1;
-      }else if(obj.pm25>25 && obj.pm25<=37){
+      }else if(obj.pm25>15 && obj.pm25<=25){
         th_score = 2;
-      }else if(obj.pm25>37 && obj.pm25<=50){
+      }else if(obj.pm25>25 && obj.pm25<=37.5){
         th_score = 3;
-      }else if(obj.pm25>50 && obj.pm25<=90){
+      }else if(obj.pm25>37.5 && obj.pm25<=75){
         th_score = 4;
-      }else if(obj.pm25>90){
+      }else if(obj.pm25>75){
         th_score = 5;
       }
+	    
 
       if(obj.pm25<=11.9){
         us_score=1;
@@ -1009,15 +1010,15 @@ app.get('/sensors/10', (req, res) => {
       var us_aqi = 0;
       us_aqi = uscal(obj.pm25);
 
-      if(obj.pm25<=25){
+      if(obj.pm25<=15){
         th_score = 1;
-      }else if(obj.pm25>25 && obj.pm25<=37){
+      }else if(obj.pm25>15 && obj.pm25<=25){
         th_score = 2;
-      }else if(obj.pm25>37 && obj.pm25<=50){
+      }else if(obj.pm25>25 && obj.pm25<=37.5){
         th_score = 3;
-      }else if(obj.pm25>50 && obj.pm25<=90){
+      }else if(obj.pm25>37.5 && obj.pm25<=75){
         th_score = 4;
-      }else if(obj.pm25>90){
+      }else if(obj.pm25>75){
         th_score = 5;
       }
 
@@ -1284,15 +1285,15 @@ app.get('/sensors/11', (req, res) => {
       var us_aqi = 0;
       us_aqi = uscal(obj.pm2_5);
 
-      if(obj.pm2_5<=25){
+      if(obj.pm2_5<=15){
         th_score = 1;
-      }else if(obj.pm2_5>25 && obj.pm2_5<=37){
+      }else if(obj.pm2_5>15 && obj.pm2_5<=25){
         th_score = 2;
-      }else if(obj.pm2_5>37 && obj.pm2_5<=50){
+      }else if(obj.pm2_5>25 && obj.pm2_5<=37.5){
         th_score = 3;
-      }else if(obj.pm2_5>50 && obj.pm2_5<=90){
+      }else if(obj.pm2_5>37.5 && obj.pm2_5<=75){
         th_score = 4;
-      }else if(obj.pm2_5>90){
+      }else if(obj.pm2_5>75){
         th_score = 5;
       }
 
@@ -1565,15 +1566,15 @@ app.get('/sensors/13', (req, res) => {
       var us_aqi = 0;
       us_aqi = uscal(obj.pm2_5);
 
-      if(obj.pm2_5<=25){
+      if(obj.pm2_5<=15){
         th_score = 1;
-      }else if(obj.pm2_5>25 && obj.pm2_5<=37){
+      }else if(obj.pm2_5>15 && obj.pm2_5<=25){
         th_score = 2;
-      }else if(obj.pm2_5>37 && obj.pm2_5<=50){
+      }else if(obj.pm2_5>25 && obj.pm2_5<=37.5){
         th_score = 3;
-      }else if(obj.pm2_5>50 && obj.pm2_5<=90){
+      }else if(obj.pm2_5>37.5 && obj.pm2_5<=75){
         th_score = 4;
-      }else if(obj.pm2_5>90){
+      }else if(obj.pm2_5>75){
         th_score = 5;
       }
 
