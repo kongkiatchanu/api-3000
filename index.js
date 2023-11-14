@@ -617,15 +617,15 @@ app.get('/sensors/6', (req, res) => {
         var us_aqi = 0;
         us_aqi = uscal(obj.data[0].pm25);
 
-        if(obj.data[0].pm25<=25){
+	if(obj.data[0].pm25<=15){
           th_score = 1;
-        }else if(obj.data[0].pm25>25 && obj.data[0].pm25<=37){
+        }else if(obj.data[0].pm25>15 && obj.data[0].pm25<=25){
           th_score = 2;
-        }else if(obj.data[0].pm25>37 && obj.data[0].pm25<=50){
+        }else if(obj.data[0].pm25>25 && obj.data[0].pm25<=37.5){
           th_score = 3;
-        }else if(obj.data[0].pm25>50 && obj.data[0].pm25<=90){
+        }else if(obj.data[0].pm25>37.5 && obj.data[0].pm25<=75){
           th_score = 4;
-        }else if(obj.data[0].pm25>90){
+        }else if(obj.data[0].pm25>75){
           th_score = 5;
         }
 
