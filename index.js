@@ -1610,7 +1610,7 @@ app.get('/sensors/13', (req, res) => {
         source_name: 'NTAQHI',
         pm10: '0',
         pm25: obj.pm2_5,
-	pm11: 0,      
+	pm11: th_score,      
         temp: '0',
         humid: '0',
         us_aqi: us_aqi,
