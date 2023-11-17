@@ -1630,7 +1630,7 @@ var data = [];
           th_title: th_array[th_score].title,
           th_caption: th_array[th_score].caption,
           th_dustboy_icon: th_array[th_score].icon,
-          log_datetime: new Date(obj.data[0].time).toISOString(),
+          log_datetime: new Date(obj.data[0].time).setHours(today.getHours() + 7).toISOString().slice(0, 19).replace('T', ' '),,
         }
         data.push(dust)
       }
