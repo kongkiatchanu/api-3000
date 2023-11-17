@@ -9,6 +9,10 @@ var thformula = function (v, v1, v2, a1, a2) {
      return Math.round(a1+ (a2-a1)*(v-v1)/(v2-v1));
 }
 
+var addHours = function (date, hours) {
+  return new Date(new Date(date).setHours(date.getHours() + hours));
+}
+
 var thcal = function (val) {
   var data = 0;
   if(Math.round(val)<=25){
@@ -1532,7 +1536,6 @@ var config = {
 //
 
 app.get('/sensors/99', (req, res) => {
-	console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
 var data = [];
 
   var axios = require('axios');
@@ -1631,7 +1634,7 @@ var data = [];
           th_title: th_array[th_score].title,
           th_caption: th_array[th_score].caption,
           th_dustboy_icon: th_array[th_score].icon,
-          log_datetime: new Date(obj.data[0].time),
+          log_datetime: addHoursToDate(new Date(obj.data[0].time),7).toISOString().slice(0, 19).replace('T', ' '),
         }
         data.push(dust)
       }
