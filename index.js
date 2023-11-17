@@ -1538,95 +1538,108 @@ var data = [];
 
   var config = {
     method: 'get',
-    url: 'https://www.ntaqhi.info/api/avghour/UyCnKlT4OvX89Rh6PWCsuaSllUnghWcwKxg0sGMV',
-    headers: { }
+    url: 'https://www.cusense.net:8082/api/v1/sensorData/realtime/pm',
+    headers: {
+      'accept': 'application/json',
+      'X-Gravitee-Api-Key': 'dc45a48f-a2de-42db-a588-50c8ddf5da03'
+    }
   };
 
   axios(config)
   .then(function (response) {
-    // console.log(JSON.stringify(response.data));
-    // console.log('before='+before);
-    // console.log('after='+after);
-    // res.send(JSON.stringify(response.data));
+    console.log(JSON.stringify(response.data));
+    //res.send(JSON.stringify(response.data, replacer));
 
-    var jsondata = response.data.data
+    var jsondata = response.data
 
-    jsondata.forEach(obj => {
+    let cuSenseArray = Object.keys(jsondata).map(key => jsondata[key]);
+    console.log(cuSenseArray);
 
-      //start looping through data
-      var th_score = 0;
-      var us_score = 0;
+    cuSenseArray.forEach(obj => {
 
-      var th_aqi = 0;
-      th_aqi = thcal(obj.pm2_5);
+      if (obj.info.project != "Dustboy")
+      {
+        console.log(JSON.stringify(obj.data[0].time));
+        console.log(JSON.stringify(obj.data[0].pm25));
+        console.log(JSON.stringify(obj.info.id));
+        console.log(JSON.stringify(obj.info.lat));
+        console.log(JSON.stringify(obj.info.lon));
+        //start looping through data
+        var th_score = 0;
+        var us_score = 0;
 
-      var us_aqi = 0;
-      us_aqi = uscal(obj.pm2_5);
+        var th_aqi = 0;
+        th_aqi = thcal(obj.data[0].pm25);
 
-      if(obj.pm2_5<=15){
-        th_score = 1;
-      }else if(obj.pm2_5>15 && obj.pm2_5<=25){
-        th_score = 2;
-      }else if(obj.pm2_5>25 && obj.pm2_5<=37.5){
-        th_score = 3;
-      }else if(obj.pm2_5>37.5 && obj.pm2_5<=75){
-        th_score = 4;
-      }else if(obj.pm2_5>75){
-        th_score = 5;
-      }
+        var us_aqi = 0;
+        us_aqi = uscal(obj.data[0].pm25);
 
-      if(obj.pm2_5<=11.9){
-        us_score=1;
-      }
-      else if( (obj.pm2_5<=35.4) && (obj.pm2_5>11.9) ){
-        us_score=2;
-      }
-      else if( (obj.pm2_5<=55.4) && (obj.pm2_5>35.4) ){
-        us_score=3;
-      }
-      else if( (obj.pm2_5<=150.4) && (obj.pm2_5>55.4) ){
-        us_score=4;
-      }
-      else if( (obj.pm2_5<=250.4) && (obj.pm2_5>150.4) ){
-        us_score=5;
-      }
-      else if( (obj.pm2_5<=350.4) && (obj.pm2_5>250.4) ){
-        us_score=6;
-      }
-      else if( (obj.pm2_5>350.4) ){
-        us_score=6;
-      }
+	if(obj.data[0].pm25<=15){
+          th_score = 1;
+        }else if(obj.data[0].pm25>15 && obj.data[0].pm25<=25){
+          th_score = 2;
+        }else if(obj.data[0].pm25>25 && obj.data[0].pm25<=37.5){
+          th_score = 3;
+        }else if(obj.data[0].pm25>37.5 && obj.data[0].pm25<=75){
+          th_score = 4;
+        }else if(obj.data[0].pm25>75){
+          th_score = 5;
+        }
 
-      var dust = {
-        id: 130000 + parseInt(obj.id),
-        dustboy_id: 130000 + parseInt(obj.id),
-        dustboy_name: obj.area_name,
-        dustboy_lat: obj.latitude,
-        dustboy_lon: obj.longitude,
-        source_id: '13',
-        source_name: 'NTAQHI',
-        pm10: '0',
-        pm25: obj.pm2_5,    
-        temp: '0',
-        humid: '0',
-        us_aqi: us_aqi,
-        us_color: us_array[us_score].color,
-        us_title: us_array[us_score].title,
-        us_caption: us_array[us_score].caption,
-        us_dustboy_icon: us_array[us_score].icon,
-        th_aqi: th_aqi,
-        th_color: th_array[th_score].color,
-        th_title: th_array[th_score].title,
-        th_caption: th_array[th_score].caption,
-        th_dustboy_icon: th_array[th_score].icon,
-        log_datetime: obj.ts,
+        if(obj.data[0].pm25<=11.9){
+          us_score=1;
+        }
+        else if( (obj.data[0].pm25<=35.4) && (obj.data[0].pm25>11.9) ){
+          us_score=2;
+        }
+        else if( (obj.data[0].pm25<=55.4) && (obj.data[0].pm25>35.4) ){
+          us_score=3;
+        }
+        else if( (obj.data[0].pm25<=150.4) && (obj.data[0].pm25>55.4) ){
+          us_score=4;
+        }
+        else if( (obj.data[0].pm25<=250.4) && (obj.data[0].pm25>150.4) ){
+          us_score=5;
+        }
+        else if( (obj.data[0].pm25<=350.4) && (obj.data[0].pm25>250.4) ){
+          us_score=6;
+        }
+        else if( (obj.data[0].pm25>350.4) ){
+          us_score=6;
+        }
+
+        var dust = {
+          id: obj.id,
+          dustboy_id: obj.info.id,
+          dustboy_name: obj.info.name,
+          dustboy_lat: obj.info.lat,
+          dustboy_lon: obj.info.lon,
+          source_id: '6',
+          source_name: 'CUSense',
+          pm10: obj.data[0].pm10,
+          pm25: obj.data[0].pm25,
+          temp: '0',
+          humid: '0',
+          us_aqi: us_aqi,
+          us_color: us_array[us_score].color,
+          us_title: us_array[us_score].title,
+          us_caption: us_array[us_score].caption,
+          us_dustboy_icon: us_array[us_score].icon,
+          th_aqi: th_aqi,
+          th_color: th_array[th_score].color,
+          th_title: th_array[th_score].title,
+          th_caption: th_array[th_score].caption,
+          th_dustboy_icon: th_array[th_score].icon,
+          log_datetime: new Date(obj.data[0].time).toISOString().slice(0, 19).replace('T', ' '),
+        }
+        data.push(dust)
       }
-      data.push(dust)
       //end looping through data
 
 
     });
     res.send(JSON.stringify(data, replacer));
+
 
   })
   .catch(function (error) {
