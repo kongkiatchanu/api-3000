@@ -1532,7 +1532,106 @@ var config = {
 //
 
 app.get('/sensors/99', (req, res) => {
-	console.log(Date().toISOString().slice(0, 19).replace('T', ' '));
+var data = [];
+
+  var axios = require('axios');
+
+  var config = {
+    method: 'get',
+    url: 'https://www.ntaqhi.info/api/avghour/UyCnKlT4OvX89Rh6PWCsuaSllUnghWcwKxg0sGMV',
+    headers: { }
+  };
+
+  axios(config)
+  .then(function (response) {
+    // console.log(JSON.stringify(response.data));
+    // console.log('before='+before);
+    // console.log('after='+after);
+    // res.send(JSON.stringify(response.data));
+
+    var jsondata = response.data.data
+
+    jsondata.forEach(obj => {
+
+      //start looping through data
+      var th_score = 0;
+      var us_score = 0;
+
+      var th_aqi = 0;
+      th_aqi = thcal(obj.pm2_5);
+
+      var us_aqi = 0;
+      us_aqi = uscal(obj.pm2_5);
+
+      if(obj.pm2_5<=15){
+        th_score = 1;
+      }else if(obj.pm2_5>15 && obj.pm2_5<=25){
+        th_score = 2;
+      }else if(obj.pm2_5>25 && obj.pm2_5<=37.5){
+        th_score = 3;
+      }else if(obj.pm2_5>37.5 && obj.pm2_5<=75){
+        th_score = 4;
+      }else if(obj.pm2_5>75){
+        th_score = 5;
+      }
+
+      if(obj.pm2_5<=11.9){
+        us_score=1;
+      }
+      else if( (obj.pm2_5<=35.4) && (obj.pm2_5>11.9) ){
+        us_score=2;
+      }
+      else if( (obj.pm2_5<=55.4) && (obj.pm2_5>35.4) ){
+        us_score=3;
+      }
+      else if( (obj.pm2_5<=150.4) && (obj.pm2_5>55.4) ){
+        us_score=4;
+      }
+      else if( (obj.pm2_5<=250.4) && (obj.pm2_5>150.4) ){
+        us_score=5;
+      }
+      else if( (obj.pm2_5<=350.4) && (obj.pm2_5>250.4) ){
+        us_score=6;
+      }
+      else if( (obj.pm2_5>350.4) ){
+        us_score=6;
+      }
+
+      var dust = {
+        id: 130000 + parseInt(obj.id),
+        dustboy_id: 130000 + parseInt(obj.id),
+        dustboy_name: obj.area_name,
+        dustboy_lat: obj.latitude,
+        dustboy_lon: obj.longitude,
+        source_id: '13',
+        source_name: 'NTAQHI',
+        pm10: '0',
+        pm25: obj.pm2_5,    
+        temp: '0',
+        humid: '0',
+        us_aqi: us_aqi,
+        us_color: us_array[us_score].color,
+        us_title: us_array[us_score].title,
+        us_caption: us_array[us_score].caption,
+        us_dustboy_icon: us_array[us_score].icon,
+        th_aqi: th_aqi,
+        th_color: th_array[th_score].color,
+        th_title: th_array[th_score].title,
+        th_caption: th_array[th_score].caption,
+        th_dustboy_icon: th_array[th_score].icon,
+        log_datetime: obj.ts,
+      }
+      data.push(dust)
+      //end looping through data
+
+
+    });
+    res.send(JSON.stringify(data, replacer));
+
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 });
 
 ///sensors/13
