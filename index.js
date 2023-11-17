@@ -187,10 +187,10 @@ var data = [];
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "192.168.1.99",
-  user: "dev",
-  password: "nrct",
-  database: "dev"
+  host: "localhost",
+  user: "api_3000",
+  password: "Amazon1234!",
+  database: "api_3000"
 });
 
 con.connect(function(err) {
@@ -285,10 +285,10 @@ var data = [];
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "192.168.1.99",
-  user: "dev",
-  password: "nrct",
-  database: "dev"
+  host: "localhost",
+  user: "api_3000",
+  password: "Amazon1234!",
+  database: "api_3000"
 });
 
 con.connect(function(err) {
@@ -382,10 +382,10 @@ var data = [];
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "192.168.1.99",
-  user: "dev",
-  password: "nrct",
-  database: "dev"
+  host: "localhost",
+  user: "api_3000",
+  password: "Amazon1234!",
+  database: "api_3000"
 });
 
 con.connect(function(err) {
@@ -481,10 +481,10 @@ var data = [];
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "192.168.1.99",
-  user: "dev",
-  password: "nrct",
-  database: "dev"
+  host: "localhost",
+  user: "api_3000",
+  password: "Amazon1234!",
+  database: "api_3000"
 });
 
 con.connect(function(err) {
