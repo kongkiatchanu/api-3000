@@ -677,7 +677,8 @@ app.get('/sensors/6', (req, res) => {
           th_title: th_array[th_score].title,
           th_caption: th_array[th_score].caption,
           th_dustboy_icon: th_array[th_score].icon,
-          log_datetime: new Date(obj.data[0].time).toISOString().slice(0, 19).replace('T', ' '),
+         // log_datetime: new Date(obj.data[0].time).toISOString().slice(0, 19).replace('T', ' '),
+	  log_datetime: addHoursToDate(new Date(obj.data[0].time),7).toISOString().slice(0, 19).replace('T', ' '),
         }
         data.push(dust)
       }
@@ -788,7 +789,8 @@ app.get('/sensors/7', (req, res) => {
         th_title: th_array[th_score].title,
         th_caption: th_array[th_score].caption,
         th_dustboy_icon: th_array[th_score].icon,
-        log_datetime: new Date(obj.log_datetime).toISOString().slice(0, 19).replace('T', ' '),
+       // log_datetime: new Date(obj.log_datetime).toISOString().slice(0, 19).replace('T', ' '),
+	      log_datetime: addHoursToDate(new Date(obj.log_datetime),7).toISOString().slice(0, 19).replace('T', ' '),
       }
       data.push(dust)
       //end looping through data
@@ -1070,7 +1072,8 @@ app.get('/sensors/10', (req, res) => {
         th_title: th_array[th_score].title,
         th_caption: th_array[th_score].caption,
         th_dustboy_icon: th_array[th_score].icon,
-        log_datetime: new Date(obj.created_at).toISOString().slice(0, 19).replace('T', ' '),
+        //log_datetime: new Date(obj.created_at).toISOString().slice(0, 19).replace('T', ' '),
+	       log_datetime: addHoursToDate(new Date(obj.created_at),7).toISOString().slice(0, 19).replace('T', ' '),
       }
       data.push(dust)
       //end looping through data
@@ -1345,7 +1348,8 @@ app.get('/sensors/11', (req, res) => {
         th_title: th_array[th_score].title,
         th_caption: th_array[th_score].caption,
         th_dustboy_icon: th_array[th_score].icon,
-        log_datetime: new Date(obj.timestamp).toISOString().slice(0, 19).replace('T', ' '),
+        //log_datetime: new Date(obj.timestamp).toISOString().slice(0, 19).replace('T', ' '),
+	      log_datetime: addHoursToDate(new Date(obj.timestamp),7).toISOString().slice(0, 19).replace('T', ' '),
       }
       data.push(dust)
       //end looping through data
