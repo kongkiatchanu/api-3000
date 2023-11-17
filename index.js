@@ -9,7 +9,7 @@ var thformula = function (v, v1, v2, a1, a2) {
      return Math.round(a1+ (a2-a1)*(v-v1)/(v2-v1));
 }
 
-var addHours = function (date, hours) {
+var addHoursToDate = function (date, hours) {
   return new Date(new Date(date).setHours(date.getHours() + hours));
 }
 
