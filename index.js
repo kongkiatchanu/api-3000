@@ -1532,6 +1532,7 @@ var config = {
 //
 
 app.get('/sensors/99', (req, res) => {
+	console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
 var data = [];
 
   var axios = require('axios');
