@@ -1639,5 +1639,9 @@ app.get('/sensors/13', (req, res) => {
 });
 //
 
+app.get('/sensors/99', (req, res) => {
+	res.end(Date().toISOString().slice(0, 19).replace('T', ' '));
+});
+
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Listening on port${port}...`) );
