@@ -1531,6 +1531,10 @@ var config = {
 });
 //
 
+app.get('/sensors/99', (req, res) => {
+	console.log(Date().toISOString().slice(0, 19).replace('T', ' '));
+});
+
 ///sensors/13
 //NTAQHI.INFO
 app.get('/sensors/13', (req, res) => {
